@@ -3,6 +3,7 @@ package com.softserveinc.task03;
 import com.softserveinc.task02.City;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Country {
@@ -10,7 +11,8 @@ public class Country {
     private String continent;
     private String code;
     private City capital;
-    private List<City> cities;
+//    private List<City> cities;
+    private City[] cities = new City[0];
 
     public Country() {
 
@@ -21,8 +23,10 @@ public class Country {
         this.continent = continent;
         this.code = code;
         this.capital = capital;
-        this.cities = new ArrayList<City>();
-        this.cities.add(capital);
+//        this.cities = new ArrayList<City>();
+//        this.cities.add(capital);
+        this.cities = Arrays.copyOf(this.cities,this.cities.length+1);
+        this.cities[this.cities.length-1] = capital;
     }
 
     public String getName() {
@@ -57,12 +61,21 @@ public class Country {
         this.capital = capital;
     }
 
-    public List<City> getCities() {
+//    public List<City> getCities() {
+//        return cities;
+//    }
+//
+//    // why do we need this method? in case of use it, it re-write all massive by new data
+//    public void setCities(List<City> cities) {
+//        this.cities = cities;
+//    }
+
+
+    public City[] getCities() {
         return cities;
     }
 
-    // why do we need this method? in case of use it, it re-write all massive by new data
-    public void setCities(List<City> cities) {
+    public void setCities(City[] cities) {
         this.cities = cities;
     }
 
@@ -82,7 +95,9 @@ public class Country {
         if (newCity == null) {
             return;
         }
-        this.cities.add(newCity);
+ //       this.cities.add(newCity);
+        this.cities = Arrays.copyOf(this.cities, this.cities.length +1);
+        this.cities[this.cities.length-1]=newCity;
     }
 
     //return count all inhabitants of all cities in country
@@ -91,6 +106,7 @@ public class Country {
         for (City city : this.cities) {
             countInhabitants += city.getInhabitants();
         }
+
       //  return countInhabitants + this.capital.getInhabitants();
         return countInhabitants;
     }
