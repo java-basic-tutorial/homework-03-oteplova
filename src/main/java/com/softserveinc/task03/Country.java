@@ -12,10 +12,10 @@ public class Country {
     private String code;
     private City capital;
 //    private List<City> cities;
-    private City[] cities = new City[0];
+    private City[] cities;
 
     public Country() {
-
+        this(null,null,null,null); //call constructor with parameters
     }
 
     public Country(String name, String continent, String code, City capital) {
@@ -25,8 +25,7 @@ public class Country {
         this.capital = capital;
 //        this.cities = new ArrayList<City>();
 //        this.cities.add(capital);
-        this.cities = Arrays.copyOf(this.cities,this.cities.length+1);
-        this.cities[this.cities.length-1] = capital;
+        this.cities = new City[]{capital};
     }
 
     public String getName() {
